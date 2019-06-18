@@ -37,5 +37,8 @@ loop do
 end
 
 monthly_interest_rate = ((apr / 12) / 100)
-monthly_payment = (loan_total * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**-loan_length)))
+monthly_payment = (loan_total *
+                  (monthly_interest_rate /
+                  (1 - (1 + monthly_interest_rate)**-loan_length)))
+
 prompt("Your monthly payment is going to be $#{monthly_payment.round(2)}.")
