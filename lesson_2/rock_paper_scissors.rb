@@ -1,4 +1,9 @@
-VALID_CHOICES = %w(rock paper scissors)
+VALID_CHOICES = %w(rock paper scissors lizard spock)
+WINNING_MOVES = { rock: ['scissors', 'lizard'],
+                  paper: ['rock', 'spock'],
+                  scissors: ['paper', 'lizard'],
+                  lizard: ['spock', 'paper'],
+                  spock: ['scissors', 'rock'] }
 
 def prompt(message)
   Kernel.puts("=> #{message}")
