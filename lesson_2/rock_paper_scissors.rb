@@ -16,10 +16,21 @@ def win?(first, second)
   WINNING_MOVES[first.to_sym].include?(second)
 end
 
-def diplay_results(player, computer)
+def determine_winner(player, computer)
   if win?(player, computer)
-    prompt("You won!")
+    'player'
   elsif win?(computer, player)
+    'computer'
+  else
+    'tie'
+  end
+end
+
+def diplay_results(winner, player, computer)
+  prompt("Player:#{player} Computer:#{computer}")
+  if winner == 'player'
+    prompt("You won!")
+  elsif winner == 'computer'
     prompt("Computer won!")
   else
     prompt("It's a tie!")
@@ -28,26 +39,40 @@ end
 
 loop do
   choice = ''
+  player_score = 0
+  computer_score = 0
   loop do
-    prompt("Choose one: #{VALID_CHOICES.join(', ')}")
-    choice = Kernel.gets().chomp()
+    loop do
+      prompt("Choose one: #{VALID_CHOICES.join(', ')}")
+      choice = Kernel.gets().chomp()
 
-    if SHORTHAND_CHOICES.key?(choice.to_sym)
-      choice = SHORTHAND_CHOICES[choice.to_sym]
-      break
-    elsif VALID_CHOICES.include?(choice)
-      break
-    else
-      prompt("That's not a valid choice.")
+      if SHORTHAND_CHOICES.key?(choice.to_sym)
+        choice = SHORTHAND_CHOICES[choice.to_sym]
+        break
+      elsif VALID_CHOICES.include?(choice)
+        break
+      else
+        prompt("That's not a valid choice.")
+      end
     end
+
+    computer_choice = VALID_CHOICES.sample()
+
+    prompt("You chose: #{choice}; Computer chose: #{computer_choice}")
+
+    winner = determine_winner(choice, computer_choice)
+
+    if winner == 'player'
+      player_score += 1
+    elsif winner == 'computer'
+      computer_score += 1
+    end
+
+    diplay_results(winner, player_score, computer_score)
+
+    break if player_score == 5 || computer_score == 5
   end
-
-  computer_choice = VALID_CHOICES.sample()
-
-  prompt("You chose: #{choice}; Computer chose: #{computer_choice}")
-
-  diplay_results(choice, computer_choice)
-
+  prompt("Game Over!")
   prompt("Do you want to play again?")
   answer = Kernel.gets().chomp()
   break unless answer.downcase().start_with?('y')
