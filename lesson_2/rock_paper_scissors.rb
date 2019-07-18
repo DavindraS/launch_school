@@ -1,4 +1,7 @@
 VALID_CHOICES = %w(rock paper scissors lizard spock)
+SHORTHAND_CHOICES = { 'r': 'rock', 'p': 'paper',
+                      'sc': 'scissors', 'l': 'lizard',
+                      'sp': 'spock' }
 WINNING_MOVES = { rock: ['scissors', 'lizard'],
                   paper: ['rock', 'spock'],
                   scissors: ['paper', 'lizard'],
@@ -29,7 +32,10 @@ loop do
     prompt("Choose one: #{VALID_CHOICES.join(', ')}")
     choice = Kernel.gets().chomp()
 
-    if VALID_CHOICES.include?(choice)
+    if SHORTHAND_CHOICES.key?(choice.to_sym)
+      choice = SHORTHAND_CHOICES[choice.to_sym]
+      break
+    elsif VALID_CHOICES.include?(choice)
       break
     else
       prompt("That's not a valid choice.")
