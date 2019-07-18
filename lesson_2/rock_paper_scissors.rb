@@ -10,9 +10,7 @@ def prompt(message)
 end
 
 def win?(first, second)
-  (first == 'rock' && second == 'scissors') ||
-    (first == 'paper' && second == 'rock') ||
-    (first == 'scissors' && second == 'paper')
+  WINNING_MOVES[first.to_sym].include?(second)
 end
 
 def diplay_results(player, computer)
