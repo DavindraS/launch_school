@@ -30,3 +30,10 @@
   numbers.delete_at(1) will remove the element at index 1 in this case, 2
   numbers.delete(1) will remove all the number 1's in the array
 =end
+
+# Question 5
+=begin
+  Programmatically determine if 42 lies between 10 and 100 (use range)
+  (10..100).include?(42). This is my original answer
+  (10..100).cover?(42)
+=end
