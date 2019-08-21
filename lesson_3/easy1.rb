@@ -18,3 +18,9 @@
   5. ? after something means that the thing will return a boolean
   6. !! means not not. ex. !!true = true. !true = false, so !false = true
 =end
+
+# Question 3
+=begin
+  To replace the word important with urgent, I would use the following code:
+  advice.gsub!('important, 'urgent')
+=end
