@@ -1,7 +1,7 @@
 # fix the code to determine if an input string is an IP address
 
-def is_an_ip_number?(input)
-  (0..255).include?(input.to_i)
+def an_ip_number?(input)
+  (0..255).cover?(input.to_i)
 end
 
 def dot_separated_ip_address?(input_string)
@@ -9,12 +9,12 @@ def dot_separated_ip_address?(input_string)
   # if there are more or less digits than required, return false
   return false if dot_separated_words.size != 4
 
-  while dot_separated_words.size > 0 do
+  while !dot_separated_words.empty?
     word = dot_separated_words.pop
     # if its not an ip number, then return false
-    return false unless is_an_ip_number?(word)
+    return false unless an_ip_number?(word)
   end
-  return true
+  true
 end
 
 puts dot_separated_ip_address?("10.4.5.11") == true
